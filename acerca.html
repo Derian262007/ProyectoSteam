@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de - Filosofía Medieval</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: slideInRight 1s ease-out;
+        }
+        
+        /* Contenido principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Equipo */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease-out forwards;
+            animation-delay: calc(var(--order) * 0.1s);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid var(--light);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 3rem;
+        }
+        
+        .member-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .member-role {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* Botón */
+        .btn-container {
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1><i class="fas fa-users"></i> Nuestro Equipo</h1>
+        <p>Conoce a las mentes detrás de este proyecto sobre Filosofía Medieval</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="section">
+            <div class="section-title">
+                <h2>Integrantes del Proyecto</h2>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Miembro 1 -->
+                <div class="team-member" style="--order: 1;">
+                    <div class="<a href="https://imgbb.com/"><img src="https://i.ibb.co/jv7YX29w/Whats-App-Image-2025-03-31-at-9-05-16-AM.jpg" alt="WhatsApp Image 2025-03-31 at 9.05.16 AM" border="0"></a>
+                
+                    </div>
+                    <h3 class="member-name">Derian Trani Lopez</h3>
+                    <p class="member-role">Desarrollador web</p>
+                    <p>Responsable de la implementación técnica y funcionalidades del sitio.</p>
+                </div>
+                
+                <!-- Miembro 2 -->
+                <div class="team-member" style="--order: 2;">
+                    <div class="<a href="https://imgbb.com/"><img src="https://i.ibb.co/zTmqwZxn/F34d714e-48bf-4366-8a7f-a74c2dc20c85.jpg" alt="F34d714e-48bf-4366-8a7f-a74c2dc20c85" border="0"></a>
+                      
+                    </div>
+                    <h3 class="member-name">Andrea Montserrat Roman Morales</h3>
+                    <p class="member-role">Diseñadora de contenido</p>
+                    <p>Encargada de la estructura pedagógica y redacción de materiales.</p>
+                </div>
+                
+                <!-- Miembro 3 -->
+                <div class="team-member" style="--order: 3;">
+                    <div class="<a href="https://imgbb.com/"><img src="https://i.ibb.co/q3MkrgZD/Whats-App-Image-2025-03-30-at-4-55-44-PM.jpg" alt="WhatsApp Image 2025-03-30 at 4.55.44 PM" border="0"></a>
+                        
+                    </div>
+                    <h3 class="member-name">Leonardo Antonio Barajas Aguilar</h3>
+                    <p class="member-role">Investigador principal</p>
+                    <p>Especialista en filosofía medieval y coordinador del proyecto.</p>
+                </div>
+                
+                <!-- Miembro 4 -->
+                <div class="team-member" style="--order: 4;">
+                    <div class="<a href="https://imgbb.com/"><img src="https://i.ibb.co/cXSdBXfF/Fb96b8f3-5b38-40cf-ab80-50117fbe08ef.jpg" alt="Fb96b8f3-5b38-40cf-ab80-50117fbe08ef" border=></a>
+                      
+                    </div>
+                    <h3 class="member-name">Rebecca Romero Ramos</h3>
+                    <p class="member-role">Investigadora histórica</p>
+                    <p>Especializada en el contexto histórico de la filosofía medieval.</p>
+                </div>
+                
+                <!-- Miembro 5 -->
+                <div class="team-member" style="--order: 5;">
+                    <div class="<a href="https://imgbb.com/"><img src="https://i.ibb.co/1fZNJJTn/A65d446b-9bbc-4b5c-93ca-b1eccfb5804b.jpg" alt="A65d446b-9bbc-4b5c-93ca-b1eccfb5804b" border="0"></a>
+                        
+                    </div>
+                    <h3 class="member-name">Karen Ruanova Salgado</h3>
+                    <p class="member-role">Diseñadora gráfica</p>
+                    <p>Encargada de la identidad visual y experiencia de usuario.</p>
+                </div>
+            </div>
+            
+            <div class="btn-container">
+                <a href="index.html" class="btn">
+                    <i class="fas fa-home"></i> Volver a la página principal
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Proyecto de Filosofía Medieval. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Animación para mostrar los elementos al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            
+            function checkVisibility() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (sectionTop < windowHeight - 100) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Mostrar la primera sección inmediatamente
+            sections[0].classList.add('visible');
+            
+            window.addEventListener('scroll', checkVisibility);
+            checkVisibility();
+        });
+    </script>
+</body>
+</html>

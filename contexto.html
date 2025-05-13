@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea de Tiempo - Filosofía Medieval</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin: 10px 0 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #2575fc;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 10px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border: 4px solid #6a11cb;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        .timeline-item:nth-child(odd)::after {
+            right: -17px;
+        }
+        .timeline-item:nth-child(even)::after {
+            left: -17px;
+        }
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .timeline-year {
+            font-weight: bold;
+            color: #2575fc;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .timeline-title {
+            font-size: 1.3rem;
+            margin: 0 0 10px;
+            color: #2c3e50;
+        }
+        .timeline-philosophy {
+            font-style: italic;
+            color: #6a11cb;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .timeline-desc {
+            margin: 10px 0;
+        }
+        .timeline-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .philosopher-quote {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6a11cb;
+            padding: 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        .philosophy-concepts {
+            background-color: #e9f5ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .philosophy-concepts h4 {
+            margin: 5px 0;
+            color: #2575fc;
+        }
+        .philosophy-concepts ul {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        .historical-context {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2575fc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background: #6a11cb;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media screen and (max-width: 768px) {
+            .timeline::before {
+                left: 31px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-hourglass-half"></i> Línea de Tiempo </h1>
+        <p>Filosofía Medieval en su contexto histórico</p>
+    </header>
+
+    <div class="container">
+        <div class="timeline">
+            <!-- Item 1 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">313 d.C.</div>
+                    <h3 class="timeline-title">Edicto de Milán</h3>
+                    <p class="timeline-philosophy">Fundación de la filosofía cristiana medieval</p>
+                    <img src="https://th.bing.com/th/id/R.e96580ec43d46649c7bbe98f6c8b59ef?rik=N6B2tcfPooS63Q&pid=ImgRaw&r=0" alt="Edicto de Milán" class="timeline-img">
+                    <p class="timeline-desc">El emperador Constantino promulga el Edicto de Milán, legalizando el cristianismo en el Imperio Romano. Este hecho político marca el inicio de la filosofía cristiana medieval al permitir la libre discusión teológica y filosófica.</p>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto histórico:</strong> El Imperio Romano atraviesa una crisis política y económica. El cristianismo, antes perseguido, se convierte en religión lícita y posteriormente en religión oficial del Imperio.
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Conceptos filosóficos clave:</h4>
+                        <ul>
+                            <li>Relación entre fe y razón</li>
+                            <li>Filosofía al servicio de la teología</li>
+                            <li>Adaptación del pensamiento griego al cristianismo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">354-430 d.C.</div>
+                    <h3 class="timeline-title">San Agustín de Hipona</h3>
+                    <p class="timeline-philosophy">Platonismo cristiano</p>
+                    <img src="https://static.wixstatic.com/media/72e4cb_e2cab07710c440f2b6363c0c4b19309d~mv2.jpg/v1/fill/w_600,h_398,al_c,lg_1,q_80/72e4cb_e2cab07710c440f2b6363c0c4b19309d~mv2.jpg" alt="San Agustín" class="timeline-img">
+                    <p class="timeline-desc">Agustín desarrolla una síntesis entre el platonismo y el cristianismo, sentando las bases de la filosofía medieval. Sus obras abordan problemas como el mal, el tiempo, la gracia y la naturaleza humana.</p>
+                    
+                    <div class="philosopher-quote">
+                        "Comprende para creer, cree para comprender" - San Agustín
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Principales contribuciones:</h4>
+                        <ul>
+                            <li>Teoría de la iluminación divina</li>
+                            <li>Concepto de "Ciudad de Dios" vs "Ciudad terrena"</li>
+                            <li>Doctrina del pecado original</li>
+                            <li>Teoría del tiempo como distensión del alma</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto:</strong> Caída del Imperio Romano de Occidente. Agustín vive la toma de Roma por los visigodos en 410, evento que inspira "La Ciudad de Dios".
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 3 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">529 d.C.</div>
+                    <h3 class="timeline-title">Cierre de la Academia de Platón</h3>
+                    <p class="timeline-philosophy">Fin de la filosofía pagana antigua</p>
+                    <img src="https://serespensantes.com/wp-content/uploads/2019/02/051-DSC_5925_Academia-de-Atenas_900-768x510.jpg" alt="Academia de Platón" class="timeline-img">
+                    <p class="timeline-desc">El emperador Justiniano ordena el cierre de la Academia de Platón en Atenas, último bastión del pensamiento pagano. Los filósofos neoplatónicos emigran a Persia, llevando consigo textos griegos.</p>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto:</strong> El Imperio Bizantino consolida el cristianismo como religión única. Se prohíben las escuelas filosóficas paganas, pero sus ideas serán recuperadas más tarde a través del mundo islámico.
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Consecuencias filosóficas:</h4>
+                        <ul>
+                            <li>Transmisión del conocimiento griego a Oriente</li>
+                            <li>Monopolio cristiano sobre la filosofía en Occidente</li>
+                            <li>Preservación de textos en monasterios</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 4 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">800-900 d.C.</div>
+                    <h3 class="timeline-title">Renacimiento Carolingio</h3>
+                    <p class="timeline-philosophy">Preservación del saber clásico</p>
+                    <img src="https://i1.wp.com/elretohistorico.com/wp-content/uploads/2014/07/coronacioncarlomagno.jpg?resize=700%2C407" alt="Renacimiento Carolingio" class="timeline-img">
+                    <p class="timeline-desc">Carlomagno impulsa un renacimiento cultural centrado en la educación. Se establecen escuelas monásticas y catedralicias donde se copian y estudian manuscritos antiguos, preservando el conocimiento filosófico.</p>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto:</strong> Formación del Imperio Carolingio como intento de restauración del Imperio Romano en Occidente. Necesidad de educar al clero y a la administración.
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Logros intelectuales:</h4>
+                        <ul>
+                            <li>Establecimiento de escuelas en toda Europa</li>
+                            <li>Desarrollo de la escritura carolina</li>
+                            <li>Primeros comentarios medievales a textos clásicos</li>
+                            <li>Transición de la patrística a la escolástica</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 5 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1078-1141</div>
+                    <h3 class="timeline-title">Pedro Abelardo</h3>
+                    <p class="timeline-philosophy">Método escolástico</p>
+                    <img src="https://th.bing.com/th/id/OIP.dF_kIlT0nNA0x4F1iZPCNQHaD4?rs=1&pid=ImgDetMain" alt="Pedro Abelardo" class="timeline-img">
+                    <p class="timeline-desc">Abelardo desarrolla el método escolástico en su obra "Sic et Non" (Sí y No), presentando argumentos contrarios sobre cuestiones teológicas para llegar a la verdad mediante la dialéctica.</p>
+                    
+                    <div class="philosopher-quote">
+                        "La duda nos lleva a la investigación, y la investigación nos lleva a la verdad" - Pedro Abelardo
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Innovaciones metodológicas:</h4>
+                        <ul>
+                            <li>Uso sistemático de la lógica aristotélica</li>
+                            <li>Método de cuestionamiento (quaestio)</li>
+                            <li>Teoría de la intención en ética</li>
+                            <li>Conceptualismo (posición intermedia en la querella de los universales)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto:</strong> Surgimiento de las primeras universidades (Bolonia, París). Renacimiento del siglo XII con mayor acceso a textos griegos a través de traducciones árabes.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 6 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1096-1291</div>
+                    <h3 class="timeline-title">Las Cruzadas</h3>
+                    <p class="timeline-philosophy">Intercambio cultural Oriente-Occidente</p>
+                    <img src="https://th.bing.com/th/id/OIP.0vyQrXIF8JQna1GYpX0CiAHaEA?rs=1&pid=ImgDetMain" alt="Las Cruzadas" class="timeline-img">
+                    <p class="timeline-desc">Las Cruzadas, aunque principalmente expediciones militares, facilitan el contacto entre culturas y el redescubrimiento de textos filosóficos griegos preservados en el mundo árabe, especialmente las obras completas de Aristóteles.</p>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto:</strong> Expansión del Islam y conflicto por Tierra Santa. Apertura de rutas comerciales y culturales entre Europa y Oriente Medio.
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Impacto filosófico:</h4>
+                        <ul>
+                            <li>Traducciones de Aristóteles al latín</li>
+                            <li>Transmisión de la filosofía islámica (Avicena, Averroes)</li>
+                            <li>Encuentro con la ciencia árabe (matemáticas, medicina)</li>
+                            <li>Crisis por las diferencias entre fe cristiana y filosofía aristotélica</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 7 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1126-1198</div>
+                    <h3 class="timeline-title">Averroes (Ibn Rushd)</h3>
+                    <p class="timeline-philosophy">Aristotelismo islámico</p>
+                    <img src="https://th.bing.com/th/id/R.28622d7de2a76bbad97ff5e02f45e970?rik=dSwB5g7aW0WXbg&riu=http%3a%2f%2f3.bp.blogspot.com%2f-GH7Bly1GvK4%2fT0wcom-WYFI%2fAAAAAAAAABk%2fHeZ1MeJa3No%2fs1600%2faverroes.jpg&ehk=FxkF8ey1jbSus2z%2bU8I25YJ8Wfa%2bQp%2bfQe6zws7l%2fpg%3d&risl=&pid=ImgRaw&r=0" alt="Averroes" class="timeline-img">
+                    <p class="timeline-desc">Médico y filósofo andalusí cuyos comentarios a Aristóteles (traducidos al latín) influyeron enormemente en la escolástica medieval. Defendió la compatibilidad entre filosofía y religión.</p>
+                    
+                    <div class="philosopher-quote">
+                        "La ignorancia conduce al miedo, el miedo conduce al odio, y el odio conduce a la violencia. Esta es la ecuación" - Averroes
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Doctrinas clave:</h4>
+                        <ul>
+                            <li>Teoría de la doble verdad (controversial)</li>
+                            <li>Eternidad del mundo</li>
+                            <li>Unidad del intelecto agente</li>
+                            <li>Interpretación racional del Corán</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto:</strong> Al-Ándalus como puente cultural. Tensiones entre filosofía y teología en las tres religiones monoteístas.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 8 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1225-1274</div>
+                    <h3 class="timeline-title">Santo Tomás de Aquino</h3>
+                    <p class="timeline-philosophy">Síntesis entre fe y razón</p>
+                    <img src="https://3.bp.blogspot.com/-V_ooGK3ObrI/U5Zs1uuYQVI/AAAAAAAAQaE/Pl2q3WXWC4Q/s1600/Raz%C3%B3n+y+fe.jpg" alt="Santo Tomás de Aquino" class="timeline-img">
+                    <p class="timeline-desc">Tomás de Aquino realiza la síntesis más completa entre el aristotelismo y el cristianismo en su "Suma Teológica". Desarrolla las cinco vías para demostrar la existencia de Dios y sistematiza la teología católica.</p>
+                    
+                    <div class="philosopher-quote">
+                        "La razón humana tiene necesidad de ser suplementada por la revelación divina" - Tomás de Aquino
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Principales contribuciones:</h4>
+                        <ul>
+                            <li>Cinco vías para demostrar a Dios</li>
+                            <li>Distinción entre esencia y existencia</li>
+                            <li>Teoría de la ley natural</li>
+                            <li>Armonía entre razón y fe</li>
+                            <li>Teoría hilemórfica aplicada al alma humana</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto:</strong> Apogeo de la escolástica. Fundación de las órdenes mendicantes (dominicos y franciscanos). Conflictos con el averroísmo latino.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 9 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1347-1351</div>
+                    <h3 class="timeline-title">Peste Negra</h3>
+                    <p class="timeline-philosophy">Crisis de la escolástica</p>
+                    <img src="https://imagenes.elpais.com/resizer/Xq5U4ByVFnuQZLo2Y6fPxdtUqWA=/1960x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/QHHG7K4AYNBLXJP2FF3S5T5BCU.jpg" alt="Peste Negra" class="timeline-img">
+                    <p class="timeline-desc">La pandemia de peste bubónica que mató a un tercio de la población europea provoca una crisis existencial que cuestiona los sistemas filosóficos establecidos y abre paso a nuevas formas de pensamiento.</p>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto:</strong> Crisis demográfica, económica y social. Cuestionamiento de la autoridad eclesiástica. Surgimiento de movimientos milenaristas y herejías.
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Impacto filosófico:</h4>
+                        <ul>
+                            <li>Pérdida de fe en la razón</li>
+                            <li>Auge del misticismo</li>
+                            <li>Cuestionamiento de los sistemas metafísicos</li>
+                            <li>Preparación del terreno para el nominalismo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 10 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1285-1349</div>
+                    <h3 class="timeline-title">Guillermo de Ockham</h3>
+                    <p class="timeline-philosophy">Nominalismo y crítica a la escolástica</p>
+                    <img src="https://serespensantes.com/wp-content/uploads/2019/03/maxresdefault.jpg" alt="Guillermo de Ockham" class="timeline-img">
+                    <p class="timeline-desc">Ockham critica la metafísica tradicional y desarrolla el principio de economía ("navaja de Ockham"), marcando el fin de la filosofía medieval y preparando el terreno para el pensamiento moderno.</p>
+                    
+                    <div class="philosopher-quote">
+                        "No se deben multiplicar los entes sin necesidad" - Guillermo de Ockham
+                    </div>
+                    
+                    <div class="philosophy-concepts">
+                        <h4>Principales ideas:</h4>
+                        <ul>
+                            <li>Nominalismo: los universales son nombres</li>
+                            <li>Separación radical entre fe y razón</li>
+                            <li>Crítica al poder temporal del papado</li>
+                            <li>Enfoque empirista del conocimiento</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="historical-context">
+                        <strong>Contexto:</strong> Conflictos entre el papado y el imperio. Crisis de la escolástica. Surgimiento de los estados nacionales y preparación del Renacimiento.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" class="btn">Volver a la página principal</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Proyecto Filosofía Medieval | Desarrollo histórico-filosófico completo</p>
+    </footer>
+
+    <script>
+        // Animación para mostrar los elementos de la línea de tiempo al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            function checkVisibility() {
+                timelineItems.forEach(item => {
+                    const itemTop = item.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (itemTop < windowHeight - 100) {
+                        item.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Mostrar los primeros elementos inmediatamente
+            for (let i = 0; i < 2 && i < timelineItems.length; i++) {
+                timelineItems[i].classList.add('visible');
+            }
+            
+            window.addEventListener('scroll', checkVisibility);
+            checkVisibility(); // Verificar al cargar la página
+            
+            // Botón para expandir/contraer información
+            document.querySelectorAll('.timeline-content').forEach(content => {
+                content.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

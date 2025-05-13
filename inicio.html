@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Filosofía Medieval</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #2c3e50;
+            --light: #f5f5f5;
+            --accent: #e74c3c;
+            --text: #333;
+            --text-light: #555;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        p {
+            font-weight: 300;
+            color: var(--text-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--primary);
+        }
+
+        /* Animaciones */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            margin: 20px 0 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 1.2rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(106, 17, 203, 0.1);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .info-card:hover .card-header img {
+            transform: scale(1.1);
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .info-card:hover .card-icon {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: white;
+        }
+
+        .card-body {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .card-body h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .card-body p {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        /* Button */
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(106, 17, 203, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 20px;
+            }
+            
+            .card-body p {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 80px 20px;
+            }
+            
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-home"></i> Inicio</h1>
+            <p>Bienvenido a la página de Filosofía Medieval</p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <h2 class="section-title">Explora el Pensamiento Medieval</h2>
+        <p class="intro-text">
+            La filosofía medieval es un período fascinante que combina la fe y la razón. Aquí encontrarás información sobre sus principales corrientes, pensadores y obras.
+        </p>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="card-header">
+                    <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Filosofía Medieval" loading="lazy">
+                    <div class="card-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>¿Qué es la Filosofía Medieval?</h3>
+                    <p>La filosofía medieval abarca desde el siglo V hasta el siglo XV. Se caracteriza por la integración de la filosofía clásica (especialmente Platón y Aristóteles) con la teología cristiana, judía e islámica. Este período fue crucial para el desarrollo de la filosofía occidental.</p>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="card-header">
+                    <img src="https://th.bing.com/th/id/OIP.WqcLZQVHe-FPniopjGxy8QHaE3?rs=1&pid=ImgDetMain" alt="Pensadores medievales" loading="lazy">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Pensadores Destacados</h3>
+                    <p>Algunos de los filósofos más influyentes de este período incluyen a San Agustín de Hipona, Santo Tomás de Aquino, Guillermo de Ockham, Averroes y Maimónides. Cada uno contribuyó de manera única al pensamiento medieval.</p>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="card-header">
+                    <img src="https://i.ytimg.com/vi/WYveBRbFKmE/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGGUgVSg_MA8=&rs=AOn4CLCkVhgkwi9aQCiIo2THyv8982a2ww" alt="Obras medievales" loading="lazy">
+                    <div class="card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Obras Fundamentales</h3>
+                    <p>Entre las obras más importantes se encuentran "La Ciudad de Dios" de San Agustín, la "Suma Teológica" de Santo Tomás de Aquino y "La Guía de Perplejos" de Maimónides. Estas obras siguen siendo estudiadas hoy en día.</p>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="card-header">
+                    <img src="https://humanidades.com/wp-content/uploads/2023/10/san-agustin.jpg" alt="Cultura medieval" loading="lazy">
+                    <div class="card-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>Influencia Cultural</h3>
+                    <p>La filosofía medieval no se limitó a Europa; también floreció en el mundo islámico y en las comunidades judías, creando un rico intercambio cultural y filosófico que sentó las bases para el Renacimiento.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <a href="index.html" class="btn">
+                <i class="fas fa-arrow-left"></i> Volver a la página principal
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Filosofía Medieval</h3>
+            <p>Explorando las raíces del pensamiento occidental</p>
+            
+            <div class="social-links">
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <p class="footer-text">&copy; 2025 Proyecto Filosofía Medieval. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Incoherencia de los Filósofos - Al-Ghazālī</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a472a;
+            --secondary: #2d3436;
+            --dark: #0a3d62;
+            --light: #f5f6fa;
+            --accent: #e74c3c;
+            --gold: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, #1a472a, #0a3d62);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--light));
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: slideInRight 1s ease-out;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: float 2s infinite ease-in-out;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        /* Contenido principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            background: linear-gradient(135deg, #1a472a, #0a3d62);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #1a472a, #0a3d62);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Tarjetas */
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--gold);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #1a472a;
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        /* Sobre la obra */
+        .about-work {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .about-work-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            border: 3px solid var(--gold);
+        }
+        
+        .about-work-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-work-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        /* Citas */
+        .quote {
+            background: linear-gradient(135deg, #1a472a, #0a3d62);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 60px 0;
+            position: relative;
+        }
+        
+        .quote::before {
+            content: '"';
+            font-family: 'Amiri', serif;
+            font-size: 10rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            opacity: 0.2;
+            line-height: 1;
+        }
+        
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-author {
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* Conceptos */
+        .concept {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid #1a472a;
+        }
+        
+        .concept-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1a472a;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            margin: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #1a472a, #0a3d62);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0a3d62;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #1a472a;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #1a472a;
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        
+        /* Botones */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #1a472a, #0a3d62);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #1a472a;
+            border: 2px solid #1a472a;
+        }
+        
+        .btn-secondary:hover {
+            background: #1a472a;
+            color: white;
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            background: #1a472a;
+            color: white;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            text-align: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-work {
+                flex-direction: column;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1><i class="fas fa-book"></i> Tahāfut al-Falāsifa</h1>
+        <p>La Incoherencia de los Filósofos - Al-Ghazālī</p>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About the Work -->
+        <section class="section about-work">
+            <div class="about-work-img">
+                <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1309140550i/11853320.jpg" alt="Al-Ghazālī">
+            </div>
+            <div class="about-work-text">
+                <h2>Una refutación de la filosofía griega</h2>
+                <p><em>La Incoherencia de los Filósofos</em> (en árabe: <em>تهافت الفلاسفة</em>, <em>Tahāfut al-Falāsifa</em>) fue escrita por Al-Ghazālī (1058-1111) en el siglo XI como una crítica demoledora al racionalismo aristotélico de Avicena y Al-Farabi.</p>
+                <p>La obra ataca 20 puntos de la filosofía griega islámica, demostrando sus contradicciones lógicas y su incompatibilidad con el Islam ortodoxo. Su impacto fue tan grande que marcó el declive del racionalismo en el mundo islámico.</p>
+                <p>Averroes intentó refutarla en su <em>Tahāfut al-Tahāfut</em> (La Incoherencia de la Incoherencia), pero el pensamiento de Al-Ghazālī prevaleció.</p>
+            </div>
+        </section>
+
+        <!-- Quote -->
+        <section class="section quote">
+            <p class="quote-text">Los filósofos deben ser declarados incrédulos por tres de sus doctrinas: la eternidad del mundo, la negación del conocimiento divino de los particulares y la negación de la resurrección corporal</p>
+            <p class="quote-author">- Al-Ghazālī, La Incoherencia de los Filósofos</p>
+        </section>
+
+        <!-- Context -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Contexto Histórico</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.Ny8G5MSjuIY56_g8-IbbuwHaJB?rs=1&pid=ImgDetMain" alt="Al-Ghazālī" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Abū Ḥāmid al-Ghazālī</h3>
+                        <p>Teólogo, jurista y místico persa (1058-1111). Conocido como "Hujjat al-Islām" (Prueba del Islam).</p>
+                        <p>Tras una crisis espiritual, abandonó su cátedra en Bagdad para dedicarse al sufismo, escribiendo obras fundamentales como <em>Iḥyāʾ ʿUlūm al-Dīn</em> (La Revivificación de las Ciencias Religiosas).</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.Tj8uyy_yWMVq4PYblPb6VgHaER?rs=1&pid=ImgDetMain" alt="Filosofía islámica" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">La Filosofía en el Islam</h3>
+                        <p>Los filósofos islámicos (falāsifa) como Al-Farabi y Avicena habían adaptado el aristotelismo al Islam, creando un sistema racionalista que rivalizaba con la teología ortodoxa.</p>
+                        <p>Al-Ghazālī vio en esto una amenaza a la fe simple del pueblo y se propuso demostrar sus contradicciones.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.SJiB6yC1HqieXYhbcg4aEwHaEl?rs=1&pid=ImgDetMain" alt="Contexto religioso" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Crisis del Pensamiento Islámico</h3>
+                        <p>El siglo XI fue un período de intenso debate entre racionalistas (mutazilíes), tradicionalistas (asharíes) y filósofos.</p>
+                        <p>Al-Ghazālī, formado en la escuela asharí, buscó restaurar la primacía de la revelación sobre la especulación filosófica.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Concepts -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Argumentos Principales</h2>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Contra la Eternidad del Mundo</h3>
+                <p>Al-Ghazālī refuta la tesis aristotélica de que el mundo es eterno:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Si el mundo fuera eterno, habría transcurrido un tiempo infinito, lo cual es imposible</li>
+                    <li>La causalidad no prueba la eternidad, pues Dios puede crear el tiempo con el mundo</li>
+                    <li>La creación ex nihilo es racionalmente posible</li>
+                </ul>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">El Conocimiento Divino de los Particulares</h3>
+                <p>Crítica a la idea de que Dios solo conoce universales:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Un Dios que no conoce lo particular no es digno de adoración</li>
+                    <li>La omnisciencia divina es un principio coránico irrenunciable</li>
+                    <li>Los filósofos limitan a Dios con sus propias limitaciones humanas</li>
+                </ul>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">La Resurrección Corporal</h3>
+                <p>Defensa de la resurrección física contra la interpretación alegórica:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>El Corán habla claramente de resurrección corporal</li>
+                    <li>Negarla es negar las promesas y amenazas divinas</li>
+                    <li>Los filósofos caen en la incredulidad al espiritualizarlo todo</li>
+                </ul>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Causalidad y Voluntad Divina</h3>
+                <p>Ataque a la noción de causalidad necesaria:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Las causas no producen efectos por necesidad, sino por voluntad de Dios</li>
+                    <li>Dios puede intervenir en cualquier momento (milagros)</li>
+                    <li>La regularidad natural es solo costumbre (ʿāda), no necesidad metafísica</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Structure -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Estructura de la Obra</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Introducción</div>
+                    <p><strong>Método de refutación:</strong> Al-Ghazālī explica que usará la lógica de los filósofos para mostrar sus contradicciones, sin apelar a argumentos religiosos.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">20 Cuestiones</div>
+                    <p><strong>Crítica sistemática:</strong> Examina puntos como la eternidad del mundo, la negación de atributos divinos, la causalidad, el conocimiento divino y la resurrección.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Conclusión</div>
+                    <p><strong>Declaración de incredulidad:</strong> Afirma que los filósofos deben ser considerados incrédulos en tres puntos fundamentales, incompatibles con el Islam.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Influence -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Influencia y Legado</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.JDOP-WpVj_dzRlwiBzKWSwHaFw?rs=1&pid=ImgDetMain" alt="Averroes" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">La Respuesta de Averroes</h3>
+                        <p>Averroes escribió <em>Tahāfut al-Tahāfut</em> para defender a los filósofos, pero su influencia fue menor en el mundo islámico.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.HI0NO34T8ZGpw0zAihnDbQHaEu?rs=1&pid=ImgDetMain" alt="Escolástica" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Impacto en la Escolástica</h3>
+                        <p>Su crítica a la causalidad influyó en Occidente a través de traducciones latinas, anticipando el ocasionalismo.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/R.97eb2a1c46905d091ab609177992c81f?rik=vha1Hd6iCfu1aw&riu=http%3a%2f%2fsufi.cl%2fwp-content%2fuploads%2f2011%2f08%2f20070718klpprcryc_630.Ies_.SCO_.jpg&ehk=eeIcuKIqAMXSWHUzGmvXkyi3ntaMWk3Y%2bWL2NyA0SQ4%3d&risl=&pid=ImgRaw&r=0" alt="Sufismo" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Triunfo del Sufismo</h3>
+                        <p>Al-Ghazālī abrió el camino para el predominio del sufismo sobre la filosofía en el Islam suní.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Quote -->
+        <section class="section quote">
+            <p class="quote-text">La verdadera sabiduría no se encuentra en la especulación filosófica, sino en la purificación del corazón y el conocimiento directo de Dios</p>
+            <p class="quote-author">- Al-Ghazālī, La Incoherencia de los Filósofos</p>
+        </section>
+
+        <!-- Botones de navegación -->
+        <div class="btn-container">
+            <a href="obras.html" class="btn btn-secondary">
+                <i class="fas fa-book"></i> Obras Clásicas
+            </a>
+            <a href="index.html" class="btn">
+                <i class="fas fa-home"></i> Página Principal
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h3>Tahāfut al-Falāsifa - Al-Ghazālī</h3>
+        <p>La crítica más devastadora a la filosofía aristotélica en el Islam medieval</p>
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>&copy; 2023 Filosofía Islámica. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Scroll Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const scrollDown = document.querySelector('.scroll-down');
+            const backToTop = document.querySelector('.back-to-top');
+            
+            // Scroll to content
+            scrollDown.addEventListener('click', function() {
+                window.scrollTo({
+                    top: document.querySelector('.container').offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Show sections on scroll
+            function checkSections() {
+                const triggerBottom = window.innerHeight / 5 * 4;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    
+                    if(sectionTop < triggerBottom) {
+                        section.classList.add('visible');
+                    }
+                });
+                
+                // Back to top button
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+            
+            // Show first sections immediately
+            for (let i = 0; i < 2 && i < sections.length; i++) {
+                sections[i].classList.add('visible');
+            }
+            
+            window.addEventListener('scroll', checkSections);
+            checkSections();
+            
+            // Back to top functionality
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

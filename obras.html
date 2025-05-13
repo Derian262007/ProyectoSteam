@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obras - Filosofía Medieval</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2d2d2d;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #9fafbe;
+        }
+
+        p {
+            font-weight: 300;
+            color: #cfa8a8;
+        }
+
+        a {
+            text-decoration: none;
+            color: #dee3e7;
+        }
+
+        a:hover {
+            color: #2ecc71;
+        }
+
+        /* Animación para el encabezado */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin: 10px 0 0;
+        }
+
+        /* Contenido principal */
+        .content {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .content h2 {
+            font-size: 2.8rem;
+            margin: 0 0 30px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .content p {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Animación para las cajas de información */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .info-box {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 30px;
+            max-width: 800px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideInLeft 0.5s ease-out;
+        }
+
+        .info-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-box i {
+            font-size: 2.5rem;
+            color: #2575fc;
+            margin-bottom: 15px;
+        }
+
+        .info-box h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .info-box p {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        /* Estilos para las imágenes */
+        .obra-imagen {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .obra-imagen:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animación para el botón */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 2.5s ease-out;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Botón de más información */
+        .info-btn {
+            display: inline-block;
+            background-color: #475486;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .info-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-scroll"></i> Obras Clave</h1>
+        <p>Descubre las obras más importantes de la filosofía medieval</p>
+    </header>
+
+    <div class="content">
+        <h2>Obras Clave</h2>
+        <p>Explora las obras más importantes de los filósofos medievales, como <em>La Ciudad de Dios</em> de San Agustín y la <em>Suma Teológica</em> de Santo Tomás de Aquino.</p>
+        
+        <div class="info-box">
+            <i class="fas fa-book-open"></i>
+            <h3>La Ciudad de Dios</h3>
+            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1659409690i/61830094.jpg" alt="La Ciudad de Dios" class="obra-imagen">
+            <p>Escrita por San Agustín, esta obra explora la relación entre la fe y la razón, y la naturaleza de la sociedad humana. Fue escrita entre los años 413 y 426 d.C. y es una defensa del cristianismo frente a las críticas paganas.</p>
+            <a href="ciudad-dios.html" class="info-btn">Más información</a>
+        </div>
+
+        <div class="info-box">
+            <i class="fas fa-book"></i>
+            <h3>Suma Teológica</h3>
+            <img src="https://www.elejandria.com/covers/Suma_Teologica-Tomas_de_Aquino-md.png" alt="Suma Teológica" class="obra-imagen">
+            <p>Escrita por Santo Tomás de Aquino, es una de las obras más importantes de la teología y filosofía medieval. Dividida en tres partes, aborda temas como la existencia de Dios, la ética y la naturaleza humana. Fue escrita entre 1265 y 1274.</p>
+            <a href="suma-teologica.html" class="info-btn">Más información</a>
+        </div>
+
+        <div class="info-box">
+            <i class="fas fa-scroll"></i>
+            <h3>Comentario a las Sentencias</h3>
+            <img src="https://m.media-amazon.com/images/I/51c-FPd9wRL.jpg" alt="Comentario a las Sentencias" class="obra-imagen">
+            <p>Escrito por Guillermo de Ockham, este trabajo es fundamental para entender el nominalismo. Ockham critica la escolástica tradicional y defiende la simplicidad en la explicación de los fenómenos, principio conocido como la "navaja de Ockham".</p>
+            <a href="comentario-sentencias.html" class="info-btn">Más información</a>
+        </div>
+
+        <div class="info-box">
+            <i class="fas fa-star-of-david"></i>
+            <h3>La Guía de Perplejos</h3>
+            <img src="https://th.bing.com/th/id/OIP.y1MCl8LWyNqx8-KId4ccmAAAAA?rs=1&pid=ImgDetMain" alt="La Guía de Perplejos" class="obra-imagen">
+            <p>Escrita por Maimónides, esta obra es una de las más importantes de la filosofía judía medieval. Busca reconciliar la filosofía aristotélica con la fe judía, dirigida a aquellos que se sienten perplejos entre ambas.</p>
+            <a href="guia-perplejos.html" class="info-btn">Más información</a>
+        </div>
+
+        <div class="info-box">
+            <i class="fas fa-globe"></i>
+            <h3>El Incoherencia de los Filósofos</h3>
+            <img src="https://th.bing.com/th/id/R.b5f4ce84b99e4ac8fa5774c5837f9be5?rik=GTEsTJZ7FdeOKg&riu=http%3a%2f%2f1.bp.blogspot.com%2f-SB4Fu95aDuo%2fU51MhT8v7lI%2fAAAAAAAAAMY%2ft1WPcmSAa3c%2fs1600%2fBK1499_LRG.jpg&ehk=Dc9dG1Yef5YfOuLeuWW051JftBc7CZ%2bH48JN%2bAje4UQ%3d&risl=&pid=ImgRaw&r=0" alt="El Incoherencia de los Filósofos" class="obra-imagen">
+            <p>Escrita por Al-Ghazali, esta obra critica la filosofía aristotélica y defiende la primacía de la fe sobre la razón. Es una de las obras más influyentes del pensamiento islámico medieval.</p>
+            <a href="incoherencia-filosofos.html" class="info-btn">Más información</a>
+        </div>
+
+        <a href="index.html" class="btn">Volver a la página principal</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Proyecto Filosofía Medieval</p>
+    </footer>
+</body>
+</html>

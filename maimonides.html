@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maimónides - Filosofía Medieval</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8E44AD;
+            --secondary: #9B59B6;
+            --dark: #2C3E50;
+            --light: #F8F9FA;
+            --accent: #E74C3C;
+            --gold: #F1C40F;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--light);
+            color: #555;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            animation: slideUp 1.2s ease-out;
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: float 2s infinite ease-in-out;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Contenido principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section {
+            margin-bottom: 100px;
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3.2rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* Tarjetas */
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 40px;
+            transition: var(--transition);
+            border: 1px solid rgba(142, 68, 173, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .card-text {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Listas */
+        .styled-list {
+            list-style-type: none;
+            margin: 20px 0;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .styled-list li::before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            margin: 60px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 5px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--secondary);
+            border: 5px solid white;
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(142, 68, 173, 0.4);
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Citas */
+        .quote {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            margin: 80px 0;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 12rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+            
+            .quote-text {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .card-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">
+                <i class="fas fa-star-of-david"></i>
+            </div>
+            <h1>Maimónides</h1>
+            <p>El filósofo que unió la fe judía y la razón</p>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>El Gran Rabino de Córdoba</h2>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Maimónides" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Biografía</h3>
+                    <p class="card-text">Maimónides (1138-1204), cuyo nombre completo era Moses ben Maimon, fue un filósofo, médico y teólogo judío. Es conocido por su obra <em>Guía de los Perplejos</em>, donde explora la relación entre la fe judía y la filosofía aristotélica. Nació en Córdoba, España, y se convirtió en una de las figuras más importantes del pensamiento judío medieval.</p>
+                    
+                    <ul class="styled-list">
+                        <li>Nació en 1138 en Córdoba, Al-Ándalus (actual España)</li>
+                        <li>Su familia huyó de la persecución almohade en 1148</li>
+                        <li>Vivió en Fez (Marruecos) y luego en El Cairo (Egipto)</li>
+                        <li>Se convirtió en médico personal del visir de Saladino</li>
+                        <li>Fue líder de la comunidad judía en El Cairo</li>
+                        <li>Escribió sus obras más importantes en árabe y hebreo</li>
+                        <li>Murió en 1204 en Fustat, Egipto</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote -->
+        <section class="section quote">
+            <p class="quote-text">Enseña a tu lengua a decir 'no sé' y evitarás muchas confusiones</p>
+            <p class="quote-author">- Maimónides</p>
+        </section>
+
+        <!-- Works Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Obras Fundamentales</h2>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Obras de Maimónides" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Legado Escrito</h3>
+                    <p class="card-text">La obra de Maimónides abarca filosofía, medicina, derecho y teología, destacando por su integración del pensamiento aristotélico con la tradición judía.</p>
+                    
+                    <ul class="styled-list">
+                        <li><strong>Guía de los Perplejos</strong>: Obra cumbre que reconcilia filosofía aristotélica con fe judía</li>
+                        <li><strong>Mishné Torá</strong>: Código sistemático de toda la ley judía</li>
+                        <li><strong>Comentario a la Mishná</strong>: Explicación detallada del texto rabínico fundamental</li>
+                        <li><strong>Tratado sobre la lógica</strong>: Introducción a los conceptos filosóficos básicos</li>
+                        <li><strong>Los Aforismos de Maimónides</strong>: Compendio médico basado en Galeno</li>
+                        <li><strong>El Régimen de la Salud</strong>: Tratado sobre medicina preventiva</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Pensamiento Filosófico</h2>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Pensamiento de Maimónides" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Principales Doctrinas</h3>
+                    
+                    <ul class="styled-list">
+                        <li><strong>13 Principios de la Fe</strong>: Fundamentos dogmáticos del judaísmo</li>
+                        <li><strong>Armonía fe-razón</strong>: Compatibilidad entre revelación y filosofía</li>
+                        <li><strong>Teoría de la profecía</strong>: Explicación racional del fenómeno profético</li>
+                        <li><strong>Ética del justo medio</strong>: Virtud como equilibrio entre extremos</li>
+                        <li><strong>Negación de atributos divinos</strong>: Teología negativa sobre Dios</li>
+                        <li><strong>Recompensa espiritual</strong>: La verdadera recompensa es intelectual</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Cronología</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1138</div>
+                    <p>Nace en Córdoba, Al-Ándalus (actual España)</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1148</div>
+                    <p>Su familia huye de la persecución almohade</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1160</div>
+                    <p>Se establece en Fez, Marruecos, donde estudia medicina</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1165</div>
+                    <p>Se traslada a Palestina y luego a Egipto</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1170</div>
+                    <p>Comienza a escribir el Mishné Torá</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1180</div>
+                    <p>Es nombrado médico personal del visir de Saladino</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1190</div>
+                    <p>Completa la Guía de los Perplejos</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1204</div>
+                    <p>Muere en Fustat, Egipto</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Influence Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Influencia y Legado</h2>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Legado de Maimónides" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Impacto Histórico</h3>
+                    <p class="card-text">El pensamiento de Maimónides transformó el judaísmo medieval y su influencia se extendió al cristianismo y al islam.</p>
+                    
+                    <ul class="styled-list">
+                        <li><strong>En filosofía</strong>: Puente entre Aristóteles y la escolástica medieval</li>
+                        <li><strong>En judaísmo</strong>: Autoridad halájica máxima hasta hoy</li>
+                        <li><strong>En medicina</strong>: Sus tratados fueron referencia por siglos</li>
+                        <li><strong>En teología</strong>: Influenció a Tomás de Aquino y otros escolásticos</li>
+                        <li><strong>En pensamiento moderno</strong>: Precursor del racionalismo religioso</li>
+                        <li><strong>En cultura</strong>: Símbolo de la convivencia entre culturas</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Quote -->
+        <section class="section quote">
+            <p class="quote-text">Da a un hombre un pescado y lo alimentarás un día; enséñale a pescar y lo alimentarás para toda la vida</p>
+            <p class="quote-author">- Atribuido a Maimónides</p>
+        </section>
+
+        <!-- Buttons -->
+        <div class="btn-container">
+            <a href="corrientes.html" class="btn">
+                <i class="fas fa-arrow-left"></i> Volver a Corrientes
+            </a>
+            <a href="obras.html" class="btn btn-outline">
+                <i class="fas fa-book"></i> Leer Obras Completas
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Maimónides</h3>
+            <p>El Rambam y luz de la generación</p>
+            
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <p class="footer-text">&copy; 2025 Filosofía Medieval. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const scrollDown = document.querySelector('.scroll-down');
+            
+            // Scroll to content
+            scrollDown.addEventListener('click', function() {
+                window.scrollTo({
+                    top: document.querySelector('.container').offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Show sections on scroll
+            function checkSections() {
+                const triggerBottom = window.innerHeight / 5 * 4;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    
+                    if(sectionTop < triggerBottom) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Show first sections immediately
+            for (let i = 0; i < 2 && i < sections.length; i++) {
+                sections[i].classList.add('visible');
+            }
+            
+            window.addEventListener('scroll', checkSections);
+            checkSections();
+        });
+    </script>
+</body>
+</html>

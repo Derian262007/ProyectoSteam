@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suma Teológica - Santo Tomás de Aquino</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--light));
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: slideInRight 1s ease-out;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: float 2s infinite ease-in-out;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        /* Contenido principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Tarjetas */
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        /* Sobre la obra */
+        .about-work {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .about-work-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .about-work-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-work-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        /* Citas */
+        .quote {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 60px 0;
+            position: relative;
+        }
+        
+        .quote::before {
+            content: '"';
+            font-family: 'Merriweather', serif;
+            font-size: 10rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            opacity: 0.2;
+            line-height: 1;
+        }
+        
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-author {
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* Conceptos */
+        .concept {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+        }
+        
+        .concept-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            margin: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Botones */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            text-align: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-work {
+                flex-direction: column;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Suma Teológica</h1>
+        <p>La obra maestra de Santo Tomás de Aquino que sintetiza razón y fe</p>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About the Work -->
+        <section class="section about-work">
+            <div class="about-work-img">
+                <img src="https://th.bing.com/th/id/OIP.wFHiEy-JK0WKpdf1HkKyQwAAAA?rs=1&pid=ImgDetMain" alt="Suma Teológica - Santo Tomás de Aquino">
+            </div>
+            <div class="about-work-text">
+                <h2>Una síntesis monumental</h2>
+                <p><em>Suma Teológica</em> (en latín: <em>Summa Theologiae</em>) es la obra más famosa de Santo Tomás de Aquino, escrita entre 1265 y 1274. Es un compendio de teología que aborda todas las principales doctrinas de la fe cristiana.</p>
+                <p>La obra sigue el método escolástico, presentando preguntas, objeciones, respuestas y soluciones. Su objetivo era servir como guía para estudiantes de teología, combinando la filosofía aristotélica con la doctrina cristiana.</p>
+                <p>Considerada la obra cumbre de la escolástica medieval, estableció las bases de la teología católica y su influencia perdura hasta hoy.</p>
+            </div>
+        </section>
+
+        <!-- Quote -->
+        <section class="section quote">
+            <p class="quote-text">La gracia no destruye la naturaleza, sino que la perfecciona.</p>
+            <p class="quote-author">- Santo Tomás de Aquino, Suma Teológica</p>
+        </section>
+
+        <!-- Context -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Contexto Histórico</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.P63MS2ka2ZwRDW52_bKusgAAAA?w=400&h=258&rs=1&pid=ImgDetMain" alt="Santo Tomás de Aquino" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Santo Tomás de Aquino</h3>
+                        <p>Teólogo y filósofo italiano (1225-1274) de la Orden de Predicadores. Conocido como "Doctor Angélico", es el principal representante de la escolástica.</p>
+                        <p>Su pensamiento sintetiza el aristotelismo con la teología cristiana, creando un sistema filosófico-teológico que sería fundamental para la Iglesia Católica.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.WySCVrQBIIjcZ_ErDcdVBgHaEb?rs=1&pid=ImgDetMain" alt="Recuperación de Aristóteles" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Recuperación de Aristóteles</h3>
+                        <p>En el siglo XIII, Europa redescubre las obras completas de Aristóteles a través de traducciones árabes y comentaristas como Averroes.</p>
+                        <p>Tomás de Aquino logra armonizar el aristotelismo con el cristianismo, superando las tensiones entre fe y razón.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.R7PasWQNlUukr9azqgm3pgHaE7?rs=1&pid=ImgDetMain" alt="Universidades medievales" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Las Universidades Medievales</h3>
+                        <p>La Suma fue escrita en el contexto del auge de las universidades (París, Oxford, Bolonia), donde se desarrollaba el método escolástico de disputatio.</p>
+                        <p>Tomás enseñó en París y Nápoles, y su obra refleja el rigor académico de estas instituciones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Concepts -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Conceptos Fundamentales</h2>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Las Cinco Vías</h3>
+                <p>Las demostraciones racionales de la existencia de Dios:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>Vía del movimiento:</strong> Todo lo que se mueve es movido por otro, debe haber un Primer Motor.</li>
+                    <li><strong>Vía de la causalidad:</strong> Toda causa tiene otra causa, debe haber una Causa Primera.</li>
+                    <li><strong>Vía de la contingencia:</strong> Los seres contingentes requieren un Ser Necesario.</li>
+                    <li><strong>Vía de los grados de perfección:</strong> Los grados de perfección suponen un Máximo Perfecto.</li>
+                    <li><strong>Vía del orden cósmico:</strong> El orden del mundo supone una Inteligencia Ordenadora.</li>
+                </ul>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Ley Natural</h3>
+                <p>Principios morales accesibles a la razón natural:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Búsqueda del bien y evitación del mal</li>
+                    <li>Conservación de la vida</li>
+                    <li>Procreación y educación de los hijos</li>
+                    <li>Vida en sociedad</li>
+                    <li>Búsqueda de la verdad (especialmente sobre Dios)</li>
+                </ul>
+                <p>Estos principios son universales e inmutables, aunque su aplicación concreta puede variar.</p>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Esencia y Existencia</h3>
+                <p>Distinción fundamental en la metafísica tomista:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>Esencia:</strong> Lo que una cosa es (su naturaleza)</li>
+                    <li><strong>Existencia:</strong> El acto de ser de la cosa</li>
+                </ul>
+                <p>En Dios, esencia y existencia se identifican (Dios es el Ser por esencia). En las criaturas, la existencia es recibida de Dios.</p>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Virtudes</h3>
+                <p>Clasificación de las perfecciones humanas:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><strong>Virtudes cardinales:</strong> Prudencia, justicia, fortaleza y templanza (adquiridas por el esfuerzo humano)</li>
+                    <li><strong>Virtudes teologales:</strong> Fe, esperanza y caridad (infundidas por Dios)</li>
+                </ul>
+                <p>Las virtudes perfeccionan las potencias del alma (inteligencia y voluntad) para alcanzar el fin último: la visión beatífica de Dios.</p>
+            </div>
+        </section>
+
+        <!-- Structure -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Estructura de la Obra</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Primera Parte</div>
+                    <p><strong>Dios y la Creación:</strong> Trata sobre la naturaleza de Dios, la Trinidad, la creación, los ángeles y el hombre. Incluye las famosas "Cinco Vías" para demostrar la existencia de Dios.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Prima Secundae</div>
+                    <p><strong>El fin del hombre y la moral general:</strong> Examina el fin último del hombre (la felicidad en Dios), los actos humanos, las pasiones, los hábitos (virtudes y vicios) y la ley.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Secunda Secundae</div>
+                    <p><strong>Moral especial:</strong> Estudio detallado de las virtudes teologales y cardinales, y de los vicios opuestos. También trata temas sociales y políticos.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Tercera Parte</div>
+                    <p><strong>Cristología y Sacramentos:</strong> Sobre Cristo como Salvador, los sacramentos como medios de gracia. Quedó incompleta por la muerte de Tomás.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Influence -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Influencia y Legado</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/R.aff72082c9c4dde946d9895daa46d114?rik=1CR5%2bRqt6AgfFQ&riu=http%3a%2f%2f1.bp.blogspot.com%2f_DZt5WDkiQqk%2fTFFYI9Ii0jI%2fAAAAAAAADVg%2fgAPBrrrszqQ%2fw1200-h630-p-k-no-nu%2f100_0781.jpg&ehk=5aFAupvBjzk9xzKlG7UwNEVl2dyQNQrYyjq5x%2bljNrQ%3d&risl=&pid=ImgRaw&r=0" alt="Filosofía occidental" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">En la Filosofía Occidental</h3>
+                        <p>La Suma Teológica influyó en pensadores como Dante, que basó la estructura del Paraíso en la cosmovisión tomista.</p>
+                        <p>En el siglo XX, el neotomismo (Maritain, Gilson) recuperó su pensamiento como alternativa al modernismo.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.o0WUo7gEeQQvAcbKnBt3ZAHaHf?rs=1&pid=ImgDetMain" alt="Iglesia Católica" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">En la Iglesia Católica</h3>
+                        <p>En 1879, el papa León XIII declaró el tomismo como filosofía oficial de la Iglesia en la encíclica Aeterni Patris.</p>
+                        <p>El Código de Derecho Canónico y el Catecismo de la Iglesia Católica reflejan su pensamiento.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://www.psiconetwork.com/wp-content/uploads/2024/09/Filosofia-moderna.jpg" alt="Pensamiento moderno" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">En el Pensamiento Moderno</h3>
+                        <p>Su teoría de la ley natural influyó en los conceptos de derechos humanos y derecho internacional.</p>
+                        <p>Filósofos analíticos contemporáneos (como Anscombe) han retomado aspectos de su ética.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Quote -->
+        <section class="section quote">
+            <p class="quote-text">Teme al hombre de un solo libro.</p>
+            <p class="quote-author">- Atribuido a Santo Tomás de Aquino</p>
+        </section>
+
+        <!-- Botones de navegación -->
+        <div class="btn-container">
+            <a href="obras.html" class="btn btn-secondary">
+                <i class="fas fa-book"></i> Volver a Obras
+            </a>
+            <a href="index.html" class="btn">
+                <i class="fas fa-home"></i> Página Principal
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h3>Suma Teológica - Santo Tomás de Aquino</h3>
+        <p>Obra cumbre de la filosofía y teología escolástica</p>
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>&copy; 2023 Filosofía Medieval. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Scroll Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const scrollDown = document.querySelector('.scroll-down');
+            const backToTop = document.querySelector('.back-to-top');
+            
+            // Scroll to content
+            scrollDown.addEventListener('click', function() {
+                window.scrollTo({
+                    top: document.querySelector('.container').offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Show sections on scroll
+            function checkSections() {
+                const triggerBottom = window.innerHeight / 5 * 4;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    
+                    if(sectionTop < triggerBottom) {
+                        section.classList.add('visible');
+                    }
+                });
+                
+                // Back to top button
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+            
+            // Show first sections immediately
+            for (let i = 0; i < 2 && i < sections.length; i++) {
+                sections[i].classList.add('visible');
+            }
+            
+            window.addEventListener('scroll', checkSections);
+            checkSections();
+            
+            // Back to top functionality
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

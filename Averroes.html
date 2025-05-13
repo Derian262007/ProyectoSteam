@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Averroes - Filosofía Medieval</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #2C3E50;
+            --light: #F8F9FA;
+            --accent: #E74C3C;
+            --gold: #F1C40F;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--light);
+            color: #555;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1568219656418-15c329312bf1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            animation: slideUp 1.2s ease-out;
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: float 2s infinite ease-in-out;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Contenido principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section {
+            margin-bottom: 100px;
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3.2rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* Tarjetas */
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 40px;
+            transition: var(--transition);
+            border: 1px solid rgba(106, 17, 203, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .card-text {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Listas */
+        .styled-list {
+            list-style-type: none;
+            margin: 20px 0;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .styled-list li::before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            margin: 60px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 5px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--secondary);
+            border: 5px solid white;
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(106, 17, 203, 0.4);
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Citas */
+        .quote {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            margin: 80px 0;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 12rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+            
+            .quote-text {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .card-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">
+                <i class="fas fa-book"></i>
+            </div>
+            <h1>Averroes</h1>
+            <p>El filósofo que unió Oriente y Occidente</p>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>El Comentarista de Aristóteles</h2>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1568219656418-15c329312bf1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Averroes" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Biografía</h3>
+                    <p class="card-text">Averroes (1126-1198), cuyo nombre completo era Abu al-Walid Muhammad ibn Ahmad ibn Rushd, fue un filósofo, médico y jurista andalusí. Es conocido por sus comentarios sobre Aristóteles, que tuvieron un profundo impacto en el pensamiento medieval tanto en el mundo islámico como en Europa.</p>
+                    
+                    <ul class="styled-list">
+                        <li>Nació en 1126 en Córdoba, Al-Ándalus (actual España)</li>
+                        <li>Miembro de una familia distinguida de juristas</li>
+                        <li>Estudió medicina, filosofía, derecho y teología</li>
+                        <li>Sirvió como juez en Sevilla y Córdoba</li>
+                        <li>Fue médico de la corte del califa Abu Yaqub Yusuf</li>
+                        <li>Sus obras fueron prohibidas y quemadas en 1195</li>
+                        <li>Murió en 1198 en Marrakech, Marruecos</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote -->
+        <section class="section quote">
+            <p class="quote-text">La ignorancia conduce al miedo, el miedo conduce al odio, y el odio conduce a la violencia. Esta es la ecuación.</p>
+            <p class="quote-author">- Atribuido a Averroes</p>
+        </section>
+
+        <!-- Works Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Obras Fundamentales</h2>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Obras de Averroes" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Legado Escrito</h3>
+                    <p class="card-text">La obra de Averroes abarca filosofía, medicina, derecho y teología, destacando por sus comentarios sistemáticos a Aristóteles y su integración del pensamiento griego con la filosofía islámica.</p>
+                    
+                    <ul class="styled-list">
+                        <li><strong>Comentarios a Aristóteles</strong>: Serie de comentarios que interpretan y explican las obras de Aristóteles</li>
+                        <li><strong>El Incoherencia del Incoherencia</strong>: Defensa de la filosofía frente a las críticas de Al-Ghazali</li>
+                        <li><strong>Kitab al-Kulliyat fi al-Tibb</strong>: Tratado médico sobre principios generales de medicina</li>
+                        <li><strong>Fasl al-Maqal</strong>: Ensayo sobre la relación entre filosofía y religión</li>
+                        <li><strong>Tahafut al-Tahafut</strong>: Refutación detallada de las críticas de Al-Ghazali</li>
+                        <li><strong>Exposición de la República de Platón</strong>: Adaptación de la filosofía política platónica al contexto islámico</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Pensamiento Filosófico</h2>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Pensamiento de Averroes" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Principales Doctrinas</h3>
+                    
+                    <ul class="styled-list">
+                        <li><strong>Armonía entre fe y razón</strong>: Defendió que filosofía y religión no se contradicen</li>
+                        <li><strong>Teoría del intelecto</strong>: Propuso que el intelecto humano es una facultad universal</li>
+                        <li><strong>Comentarios a Aristóteles</strong>: Fundamentales para el renacimiento del aristotelismo en Europa</li>
+                        <li><strong>Separación filosofía-teología</strong>: Disciplinas distintas con métodos diferentes</li>
+                        <li><strong>Eternidad del mundo</strong>: Defendió la visión aristotélica de un mundo eterno</li>
+                        <li><strong>Influencia en el averroísmo</strong>: Corriente filosófica que influyó en Tomás de Aquino</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Cronología</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1126</div>
+                    <p>Nace en Córdoba, Al-Ándalus (actual España)</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1153</div>
+                    <p>Comienza sus estudios de filosofía y medicina</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1169</div>
+                    <p>Es nombrado juez en Sevilla</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1182</div>
+                    <p>Se convierte en médico de la corte del califa Abu Yaqub Yusuf</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1195</div>
+                    <p>Sus obras son prohibidas y quemadas; es exiliado a Lucena</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">1198</div>
+                    <p>Muere en Marrakech, Marruecos</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Siglo XIII</div>
+                    <p>Sus obras son traducidas al latín e influyen en la escolástica europea</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Influence Section -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Influencia y Legado</h2>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Legado de Averroes" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Impacto Histórico</h3>
+                    <p class="card-text">El pensamiento de Averroes marcó un punto de inflexión en la filosofía medieval, conectando el pensamiento griego con las tradiciones islámica y cristiana.</p>
+                    
+                    <ul class="styled-list">
+                        <li><strong>En filosofía</strong>: Puente entre la filosofía griega y el pensamiento medieval</li>
+                        <li><strong>En ciencia</strong>: Integró el método aristotélico con la investigación empírica</li>
+                        <li><strong>En teología</strong>: Su racionalismo influyó en la teología escolástica</li>
+                        <li><strong>En Europa</strong>: Sus comentarios fueron textos fundamentales en universidades medievales</li>
+                        <li><strong>Averroísmo</strong>: Movimiento filosófico que desarrolló sus ideas en Europa</li>
+                        <li><strong>Renacimiento</strong>: Influenció a pensadores como Pico della Mirandola</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Quote -->
+        <section class="section quote">
+            <p class="quote-text">El conocimiento es la conformidad del intelecto y lo intelectuado</p>
+            <p class="quote-author">- Averroes</p>
+        </section>
+
+        <!-- Buttons -->
+        <div class="btn-container">
+            <a href="corrientes.html" class="btn">
+                <i class="fas fa-arrow-left"></i> Volver a Corrientes
+            </a>
+            <a href="obras.html" class="btn btn-outline">
+                <i class="fas fa-book"></i> Leer Obras Completas
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Averroes</h3>
+            <p>El Comentarista y puente entre culturas</p>
+            
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <p class="footer-text">&copy; 2025 Filosofía Medieval. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const scrollDown = document.querySelector('.scroll-down');
+            
+            // Scroll to content
+            scrollDown.addEventListener('click', function() {
+                window.scrollTo({
+                    top: document.querySelector('.container').offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Show sections on scroll
+            function checkSections() {
+                const triggerBottom = window.innerHeight / 5 * 4;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    
+                    if(sectionTop < triggerBottom) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Show first sections immediately
+            for (let i = 0; i < 2 && i < sections.length; i++) {
+                sections[i].classList.add('visible');
+            }
+            
+            window.addEventListener('scroll', checkSections);
+            checkSections();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Guía de Perplejos - Maimónides</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+            --gold: #FFD700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { 
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Header */
+        .hero {
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--light));
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: slideInRight 1s ease-out;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: float 2s infinite ease-in-out;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        /* Contenido principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #8B4513, #DAA520);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Tarjetas */
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--gold);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .card-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #8B4513;
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        /* Sobre la obra */
+        .about-work {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .about-work-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            border: 3px solid var(--gold);
+        }
+        
+        .about-work-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-work-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        /* Citas */
+        .quote {
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin: 60px 0;
+            position: relative;
+        }
+        
+        .quote::before {
+            content: '"';
+            font-family: 'Merriweather', serif;
+            font-size: 10rem;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            opacity: 0.2;
+            line-height: 1;
+        }
+        
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-author {
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* Conceptos */
+        .concept {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid #8B4513;
+        }
+        
+        .concept-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #8B4513;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            margin: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #8B4513, #DAA520);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #DAA520;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #8B4513;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        
+        /* Botones */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #8B4513;
+            border: 2px solid #8B4513;
+        }
+        
+        .btn-secondary:hover {
+            background: #8B4513;
+            color: white;
+        }
+        
+        .back-to-top {
+            display: inline-block;
+            background: #8B4513;
+            color: white;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            text-align: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-work {
+                flex-direction: column;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1><i class="fas fa-star-of-david"></i> La Guía de Perplejos</h1>
+        <p>La obra cumbre de Maimónides que armoniza fe judía y filosofía aristotélica</p>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About the Work -->
+        <section class="section about-work">
+            <div class="about-work-img">
+                <img src="https://th.bing.com/th/id/OIP.nVyX4Twu80tGZXvVlgTrPgHaLG?rs=1&pid=ImgDetMain" alt="Maimónides">
+            </div>
+            <div class="about-work-text">
+                <h2>Una obra revolucionaria</h2>
+                <p><em>La Guía de Perplejos</em> (en hebreo: <em>מורה נבוכים</em>, Moré Nevujim) fue escrita por Maimónides (1135-1204) entre 1180 y 1190 en árabe, y posteriormente traducida al hebreo.</p>
+                <p>Dirigida a intelectuales judíos versados en filosofía que experimentaban conflicto entre fe y razón, la obra busca reconciliar la Torá con el pensamiento aristotélico, estableciendo las bases de la filosofía judía medieval.</p>
+                <p>Considerada la obra cumbre del racionalismo judío, su influencia trascendió el judaísmo, impactando en pensadores cristianos como Tomás de Aquino y Alberto Magno.</p>
+            </div>
+        </section>
+
+        <!-- Quote -->
+        <section class="section quote">
+            <p class="quote-text">Enseña a tu lengua a decir 'no sé', para que no te lleven a decir mentiras</p>
+            <p class="quote-author">- Maimónides, La Guía de Perplejos</p>
+        </section>
+
+        <!-- Context -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Contexto Histórico</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/R.d97b8590282ac1adc8e4c3be7b446b5b?rik=PdOsrUaYquGIEA&riu=http%3a%2f%2f3.bp.blogspot.com%2f_vS-cPKdi_RM%2fTNrqXDm2MBI%2fAAAAAAAAAa8%2fI1J-eyENDwE%2fs1600%2fmaimonides.jpg&ehk=W6%2b%2bqvDYr9Apgdn%2b9wrfTHMpx9k4Sh5GE4bolkB50mw%3d&risl=&pid=ImgRaw&r=0" alt="Maimónides" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Moisés Maimónides</h3>
+                        <p>Médico, filósofo y teólogo judío (Córdoba 1135 - El Cairo 1204). Vivió bajo dominio almohade, que perseguía a judíos y cristianos, lo que lo obligó a exiliarse.</p>
+                        <p>Además de filósofo, fue un destacado médico y autor de obras fundamentales de la ley judía como la Mishné Torá.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://img.freepik.com/fotos-premium/filosofia-islamica-es-rica-compleja-tradicion-pensamiento-sabiduria-que-explora-cuestiones-fundamentales-sobre-existencia-universo-naturaleza-realidad-generada-ia_855332-283.jpg" alt="Filosofía islámica" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Filosofía Islámica</h3>
+                        <p>Maimónides se formó en el pensamiento de filósofos islámicos como Al-Farabi, Avicena y Averroes, que habían adaptado el aristotelismo al monoteísmo.</p>
+                        <p>La Guía dialoga críticamente con estas tradiciones, creando una síntesis judía original.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.ME-OoirImJStJ8u4yKUGVAHaFC?rs=1&pid=ImgDetMain" alt="Contexto religioso" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">Contexto Religioso</h3>
+                        <p>La obra surge en un momento de tensión entre tradición religiosa y filosofía griega. Maimónides busca demostrar que el judaísmo no contradice a la razón.</p>
+                        <p>Su obra generó controversias pero terminó siendo aceptada como clásico del pensamiento judío.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Concepts -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Conceptos Fundamentales</h2>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Alegoría Bíblica</h3>
+                <p>Maimónides propone una interpretación alegórica de los pasajes bíblicos que parecen contradecir la razón:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Los relatos de la creación no deben leerse literalmente</li>
+                    <li>Los antropomorfismos de Dios son metáforas para la comprensión humana</li>
+                    <li>La Torá habla en lenguaje humano para ser accesible a todos</li>
+                </ul>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Naturaleza de Dios</h3>
+                <p>Maimónides desarrolla una teología negativa radical:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Dios solo puede ser definido por lo que no es (no corporal, no múltiple, etc.)</li>
+                    <li>Los atributos positivos limitarían la infinitud divina</li>
+                    <li>Influencia directa en la teología medieval cristiana e islámica</li>
+                </ul>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Profecía</h3>
+                <p>Explicación racional del fenómeno profético:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>La profecía requiere perfección intelectual y moral</li>
+                    <li>Es un fenómeno natural que surge de la unión del intelecto humano con el Intelecto Agente</li>
+                    <li>Moisés fue el mayor profeta por su contacto directo con Dios</li>
+                </ul>
+            </div>
+            
+            <div class="concept">
+                <h3 class="concept-title">Ley y Filosofía</h3>
+                <p>Armonización entre ley religiosa y verdad filosófica:</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li>Las mitzvot (mandamientos) tienen razones prácticas y filosóficas</li>
+                    <li>La Torá contiene verdades accesibles a todos y profundidades para los filósofos</li>
+                    <li>La filosofía es el camino más alto de servicio a Dios</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Structure -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Estructura de la Obra</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Parte I</div>
+                    <p><strong>Teología y lenguaje bíblico:</strong> Examina los antropomorfismos en la Biblia, desarrolla la teología negativa y explica los términos bíblicos que describen a Dios.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Parte II</div>
+                    <p><strong>Cosmología y profecía:</strong> Presenta su cosmología aristotélica, explica la naturaleza de la profecía y discute la creación del mundo versus su eternidad.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">Parte III</div>
+                    <p><strong>Providencia y ética:</strong> Trata sobre la providencia divina, el problema del mal, el sentido de los mandamientos y culmina con la doctrina del amor intelectual a Dios.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Influence -->
+        <section class="section">
+            <div class="section-title">
+                <h2>Influencia y Legado</h2>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.XYtqYsRkYVMmYKECaKpTEgHaFS?rs=1&pid=ImgDetMain" alt="Filosofía medieval" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">En la Filosofía Medieval</h3>
+                        <p>Influenció profundamente a Tomás de Aquino, Alberto Magno y otros escolásticos. Su teología negativa y método alegórico fueron adoptados por pensadores cristianos.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/R.7222ae1906ee6a636c055e77c8d46596?rik=ErqVbPef2Dz4lQ&pid=ImgRaw&r=0" alt="Filosofía moderna" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">En la Filosofía Moderna</h3>
+                        <p>Spinoza retomó y radicalizó su método de interpretación bíblica. Su racionalismo influyó en el desarrollo del pensamiento ilustrado judío (Haskalá).</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://th.bing.com/th/id/OIP.EurHYaBo3EgeE4zmJJ7WiQHaFK?rs=1&pid=ImgDetMain" alt="Pensamiento contemporáneo" class="card-img">
+                    <div class="card-body">
+                        <h3 class="card-title">En el Pensamiento Contemporáneo</h3>
+                        <p>Leo Strauss estudió su método de escritura esotérica. Pensadores como Hermann Cohen vieron en Maimónides un modelo de racionalidad religiosa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Quote -->
+        <section class="section quote">
+            <p class="quote-text">El propósito de la Torá es que el hombre obtenga felicidad verdadera, que consiste en la comprensión de Dios según la capacidad humana</p>
+            <p class="quote-author">- Maimónides, La Guía de Perplejos</p>
+        </section>
+
+        <!-- Botones de navegación -->
+        <div class="btn-container">
+            <a href="obras.html" class="btn btn-secondary">
+                <i class="fas fa-book"></i> Volver a Obras
+            </a>
+            <a href="index.html" class="btn">
+                <i class="fas fa-home"></i> Página Principal
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h3>La Guía de Perplejos - Maimónides</h3>
+        <p>Obra cumbre de la filosofía judía medieval</p>
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>&copy; 2023 Filosofía Medieval. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Scroll Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const scrollDown = document.querySelector('.scroll-down');
+            const backToTop = document.querySelector('.back-to-top');
+            
+            // Scroll to content
+            scrollDown.addEventListener('click', function() {
+                window.scrollTo({
+                    top: document.querySelector('.container').offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Show sections on scroll
+            function checkSections() {
+                const triggerBottom = window.innerHeight / 5 * 4;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    
+                    if(sectionTop < triggerBottom) {
+                        section.classList.add('visible');
+                    }
+                });
+                
+                // Back to top button
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+            
+            // Show first sections immediately
+            for (let i = 0; i < 2 && i < sections.length; i++) {
+                sections[i].classList.add('visible');
+            }
+            
+            window.addEventListener('scroll', checkSections);
+            checkSections();
+            
+            // Back to top functionality
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
